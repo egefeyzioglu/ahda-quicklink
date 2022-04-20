@@ -18,11 +18,29 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.3
+// @version     0.5.4
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
 // ==/UserScript==
+
+//////////////////////////////// CONTRIBUTING ////////////////////////////////
+// Normally, Tampermonkey scripts are kept online so your browser can       //
+// automatically download them when a new version is released. That was how //
+// this script worked as well, however, the AHDA who uploaded this script   //
+// to GitHub has since deleted the repository.                              //
+//                                                                          //
+// Now, I'm uploading it to GitHub again so the auto-update can work as     //
+// intended.                                                                //
+//                                                                          //
+// To contribute, please go to github.com/egefeyzioglu/ahda-quicklink and   //
+// send a pull request with your edits. I promise to keep accepting pull    //
+// requests and keep the repo up as long as I'm around computers.           //
+// Cheers,                                                                  //
+// Ege                                                                      //
+//////////////////////////////////////////////////////////////////////////////
+
+
 
 // get stored UTORid if it exists
 var admin_utorid = GM_getValue("admin_utorid", "");
