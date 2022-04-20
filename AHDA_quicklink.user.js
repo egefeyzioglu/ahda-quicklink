@@ -1,6 +1,6 @@
 // ==UserScript==
 // @author      the AHDAs
-// @name        AHDA_quicklink_new_one
+// @name        AHDA_quicklink_newer_one
 // @namespace   ahda-grease
 // @downloadURL https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
 // @updateURL   https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.2
+// @version     0.5.3
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
