@@ -235,7 +235,7 @@ if (/view.php/.test(window.location.href)) {
     // If we're not at /view.php but we're at auth.utoronto.ca, this is the home page for UTORauth
     $(function() {
         // Drop the A at the beginning to make the barcode input field work with the barcode scanners
-        $('input[name=barcode]').oninput = (e)=>{if(e.target.value == "A") e.target.value = "";};
+        $('input[name=barcode]')[0].oninput = (e)=>{if(e.target.value == "A") e.target.value = "";};
     });
 }else if (/madmin.pl/.test(window.location.href)) {
 
