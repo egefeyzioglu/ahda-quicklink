@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.4
+// @version     0.5.5
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
@@ -231,7 +231,11 @@ if (/view.php/.test(window.location.href)) {
 	});
 
 
-} else if (/madmin.pl/.test(window.location.href)) {
+} else if (/auth.utoronto.ca/.test(window.location.href)) {
+    // If we're not at /view.php but we're at auth.utoronto.ca, this is the home page for UTORauth
+    // Drop the A at the beginning to make the barcode input field work with the barcode scanners
+    $('input[name=barcode]').oninput = (e)=>{if(e.target.value == "A") e.target.value = "";};
+}else if (/madmin.pl/.test(window.location.href)) {
 
 	$(function(){
 
