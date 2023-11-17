@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.6
+// @version     0.5.7
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
