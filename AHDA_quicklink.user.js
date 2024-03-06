@@ -4,8 +4,9 @@
 // @namespace   ahda-grease
 // @downloadURL https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
 // @updateURL   https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
-// @include	https://www.auth.utoronto.ca/account/
-// @include	https://www.auth.utoronto.ca/account/account.php*
+// @include     https://www.auth.utoronto.ca/account/
+// @include     https://www.auth.utoronto.ca/account/index.php
+// @include     https://www.auth.utoronto.ca/account/account.php*
 // @include     https://www.auth.utoronto.ca/utid/
 // @include     https://www.auth.utoronto.ca/utid/index.php*
 // @include     https://www.auth.utoronto.ca/utid/input.php*
@@ -20,7 +21,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.8
+// @version     0.5.9
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
