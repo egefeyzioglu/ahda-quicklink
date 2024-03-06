@@ -4,6 +4,8 @@
 // @namespace   ahda-grease
 // @downloadURL https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
 // @updateURL   https://raw.githubusercontent.com/egefeyzioglu/ahda-quicklink/master/AHDA_quicklink.user.js
+// @include	https://www.auth.utoronto.ca/account/
+// @include	https://www.auth.utoronto.ca/account/account.php*
 // @include     https://www.auth.utoronto.ca/utid/
 // @include     https://www.auth.utoronto.ca/utid/index.php*
 // @include     https://www.auth.utoronto.ca/utid/input.php*
@@ -18,7 +20,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.7
+// @version     0.5.8
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
@@ -233,6 +235,7 @@ if (/view.php/.test(window.location.href)) {
 
 } else if (/auth.utoronto.ca/.test(window.location.href)) {
     // If we're not at /view.php but we're at auth.utoronto.ca, this is the home page for UTORauth
+    // This will also capture the new page (/account) but that's fine
     $(function() {
         // Drop the A at the beginning to make the barcode input field work with the barcode scanners
         $('input[name=barcode]')[0].oninput = (e)=>{if(e.target.value == "A") e.target.value = "";};
