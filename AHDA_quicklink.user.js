@@ -46,28 +46,28 @@
 var admin_utorid = GM_getValue("admin_utorid", "");
 
 // if stored UTORid is an empty string then prompt user
-if (!admin_utorid ){
+if (!admin_utorid) {
 	admin_utorid = prompt("Please enter your UTORid");
 
 	// store new UTORid
-	GM_setValue ("admin_utorid", admin_utorid);
+	GM_setValue("admin_utorid", admin_utorid);
 }
 
 if (/view.php/.test(window.location.href)) {
 
-	$(function() {
+	$(function () {
 
 		var utorid = $('td div table tr:contains("UTORid(s)") td').text();
-		if(utorid.substr(0, utorid.indexOf(" "))) {
+		if (utorid.substr(0, utorid.indexOf(" "))) {
 			utorid = utorid.substr(0, utorid.indexOf(" "));
 		}
 
-		$('div.buttons:first-of-type')[0].innerHTML+=('<a class="button custom" id="management" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/madmin.pl">management</a>');
-		$('div.buttons:first-of-type')[0].innerHTML+=('<a class="button custom" id="verify" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/verify.pl">verify</a>');
-		$('div.buttons:first-of-type')[0].innerHTML+=('<a class="button custom" id="sspr" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl">sspr</a>');
-        $("th:contains('UTORMFA Status')").parent().next().children('td').children()[0].innerHTML+='<br/><br/><a class="button green" id="duoadmin" target="_blank" href="https://admin-832cdf07.duosecurity.com/">Go to Duo Admin</a>';
+		$('div.buttons:first-of-type')[0].innerHTML += ('<a class="button custom" id="management" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/madmin.pl">management</a>');
+		$('div.buttons:first-of-type')[0].innerHTML += ('<a class="button custom" id="verify" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/verify.pl">verify</a>');
+		$('div.buttons:first-of-type')[0].innerHTML += ('<a class="button custom" id="sspr" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl">sspr</a>');
+		$("th:contains('UTORMFA Status')").parent().next().children('td').children()[0].innerHTML += '<br/><br/><a class="button green" id="duoadmin" target="_blank" href="https://admin-832cdf07.duosecurity.com/">Go to Duo Admin</a>';
 
-		$('#management').click(function() {
+		$('#management').click(function () {
 
 			GM_deleteValue('utorid');
 			GM_deleteValue('libnum');
@@ -77,23 +77,23 @@ if (/view.php/.test(window.location.href)) {
 
 		});
 
-		$('#verify').click(function() {
+		$('#verify').click(function () {
 			GM_deleteValue('utorid');
 
 			GM_setValue('utorid', utorid);
 			GM_setValue('utorid_time', Date.now());
 		});
 
-        $('#sspr').click(function() {
+		$('#sspr').click(function () {
 
 			GM_deleteValue('utorid');
 
 			GM_setValue('utorid', utorid);
 			GM_setValue('utorid_time', Date.now());
 
-        });
+		});
 
-		$('#duoadmin').click(function() {
+		$('#duoadmin').click(function () {
 			GM_deleteValue('utorid');
 
 			GM_setValue('utorid', utorid);
@@ -131,7 +131,7 @@ if (/view.php/.test(window.location.href)) {
     });
 }else if (/madmin.pl/.test(window.location.href)) {
 
-	$(function(){
+	$(function () {
 
 		$("#adminname").val(admin_utorid);
 		$("#adminpassword").focus();
@@ -140,7 +140,7 @@ if (/view.php/.test(window.location.href)) {
 		$("#activitylog").prop("checked", true);
 
 		var utorid = GM_getValue('utorid');
-		var utorid_elapsed = Date.now()-GM_getValue('utorid_time');
+		var utorid_elapsed = Date.now() - GM_getValue('utorid_time');
 
 		if (utorid_elapsed < 10000) {
 			$("#acctname").val(utorid);
@@ -150,7 +150,7 @@ if (/view.php/.test(window.location.href)) {
 
 } else if (/verify.pl/.test(window.location.href)) {
 
-	$(function() {
+	$(function () {
 		var utorid = GM_getValue('utorid');
 		var utorid_elapsed = Date.now() - GM_getValue('utorid_time');
 		if (utorid_elapsed < 10000) {
@@ -164,7 +164,7 @@ if (/view.php/.test(window.location.href)) {
 
 } else if (/recover.utorid.utoronto.ca/.test(window.location.href)) {
 
-	$(function() {
+	$(function () {
 
 		var utorid = GM_getValue('utorid');
 		var utorid_elapsed = Date.now() - GM_getValue('utorid_time');
@@ -175,16 +175,16 @@ if (/view.php/.test(window.location.href)) {
 		}
 
 	});
-}else if (/acctrecoveryadmin.pl/.test(window.location.href)) {
+} else if (/acctrecoveryadmin.pl/.test(window.location.href)) {
 
-	$(function(){
+	$(function () {
 
 		$("#adminname").val(admin_utorid);
 		$("#adminpassword").focus();
 		$("#activitylog").prop("checked", true);
 
 		var utorid = GM_getValue('utorid');
-		var utorid_elapsed = Date.now()-GM_getValue('utorid_time');
+		var utorid_elapsed = Date.now() - GM_getValue('utorid_time');
 
 		if (utorid_elapsed < 10000) {
 			$("#acctname").val(utorid);
@@ -193,17 +193,17 @@ if (/view.php/.test(window.location.href)) {
 	});
 } else if (/admin-832cdf07.duosecurity.com\/$/.test(window.location.href)) {
 
-	$(function(){
-        var utorid = GM_getValue('utorid');
-		var utorid_elapsed = Date.now()-GM_getValue('utorid_time');
+	$(function () {
+		var utorid = GM_getValue('utorid');
+		var utorid_elapsed = Date.now() - GM_getValue('utorid_time');
 		if (utorid_elapsed < 10000) {
-            $('input[type=search]')[0].value=utorid;
-            $('input[type=search]').focus();
-            $('input[type=search]')[0].dispatchEvent(new Event('input', {
-                'bubbles': true,
-                'cancelable': true
-            }));
-        }
+			$('input[type=search]')[0].value = utorid;
+			$('input[type=search]').focus();
+			$('input[type=search]')[0].dispatchEvent(new Event('input', {
+				'bubbles': true,
+				'cancelable': true
+			}));
+		}
 	});
 
 }
