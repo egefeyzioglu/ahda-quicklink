@@ -21,7 +21,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.9
+// @version     0.5.10
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_deleteValue
@@ -234,7 +234,19 @@ if (/view.php/.test(window.location.href)) {
 	});
 
 
-} else if (/auth.utoronto.ca/.test(window.location.href)) {
+} else if(/auth.utoronto.ca\/account\/account.php/.test(window.location.href)){
+    $(function(){
+        debugger;
+        $("th:contains('UTORMFA')").next()[0].innerHTML+='<a class="button-positive small" id="duoadmin" target="_blank" href="https://admin-832cdf07.duosecurity.com/">Go to Duo Admin</a><br/><br/>';
+
+        $('#duoadmin').click(function() {
+			GM_deleteValue('utorid');
+
+			GM_setValue('utorid', utorid);
+			GM_setValue('utorid_time', Date.now());
+		});
+    })
+}else if (/auth.utoronto.ca/.test(window.location.href)) {
     // If we're not at /view.php but we're at auth.utoronto.ca, this is the home page for UTORauth
     // This will also capture the new page (/account) but that's fine
     $(function() {
