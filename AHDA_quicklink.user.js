@@ -53,26 +53,6 @@ function checkLogin(){
     }});
 }
 
-function compareDataAsc(a,b){
-	a_float = parseFloat(a);
-	b_float = parseFloat(b);
-	a_bytes = a_float * (a.includes('GB') ? 1e9 : a.includes('MB') ? 1e6 : a.includes('KB') ? 1e3 : 1);
-	b_bytes = b_float * (b.includes('GB') ? 1e9 : b.includes('MB') ? 1e6 : b.includes('KB') ? 1e3 : 1);
-	return a_bytes - b_bytes;
-}
-
-rows = []
-document.querySelectorAll("table.log").forEach(function(elem){
-    if(!elem.innerHTML.includes('Folder')){
-			return;
-		}
-		elem.querySelectorAll('tr').forEach(function(row){
-			if(row.innerHTML.includes('Folder')) return;
-			rows.push(row);
-		})
-		rows.sort(function(a,b){data_a = a.querySelectorAll('td')[1].innerHTML; data_b = b.querySelectorAll('td')[1].innerHTML; return -compareDataAsc(data_a, data_b)})
-})
-
 // get stored UTORid if it exists
 var admin_utorid = GM_getValue("admin_utorid", "");
 
@@ -174,6 +154,8 @@ if (/view.php/.test(window.location.href)) {
 			GM_setValue('utorid', utorid);
 			GM_setValue('utorid_time', Date.now());
 		});
+
+		
     })
 }else if (/auth.utoronto.ca/.test(window.location.href)) {
     // If we're not at /view.php but we're at auth.utoronto.ca, this is the home page for UTORauth
