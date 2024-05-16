@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.12
+// @version     0.5.13
 // @connect     admin-832cdf07.duosecurity.com
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -42,6 +42,16 @@
 // Cheers,                                                                  //
 // Ege                                                                      //
 //////////////////////////////////////////////////////////////////////////////
+
+function checkLogin(){
+    GM_xmlhttpRequest({url:'https://admin-832cdf07.duosecurity.com/admin/global/search?query=asd', onload: function(){
+        if(this.status == 401){
+            setInterval(checkLogin, 500);
+        }else{
+            window.loginTab.close();
+        }
+    }});
+}
 
 function compareDataAsc(a,b){
 	a_float = parseFloat(a);
@@ -126,12 +136,24 @@ if (/view.php/.test(window.location.href)) {
 
 } else if(/auth.utoronto.ca\/account\/account.php/.test(window.location.href)){
     $(function(){
-        $("th:contains('UTORMFA')").next()[0].innerHTML+='<a class="button-positive small" id="duoadmin" href=#>Go to Duo Admin</a><br/><br/>';
+        $("th:contains('UTORMFA')").next()[0].innerHTML+='<a class="button-positive small" id="duoadmin" href=#>Go to Duo Admin</a><br/><br/><span class="utormfa-status-wrapper"></span>';
         $("th:contains('Password')").next()[0].innerHTML+='<br/><br/><a class="button-blue small" id="verify" target="_blank" href="https://www.utorid.utoronto.ca/cgi-bin/utorid/verify.pl">Verify</a>';
 
+        let clientUtorid = $('span.top-panel.head')[0].innerHTML;
+
         $('#duoadmin').click(function() {
-            $("th:contains('UTORMFA')").next()[0].innerHTML+= "<span class='utormfa-status'>Loading...</span>";
-            GM_xmlhttpRequest({url:'https://admin-832cdf07.duosecurity.com/admin/global/search?query=feyziog2', onload: function(){
+            $(".utormfa-status-wrapper")[0].innerHTML = "<span class='utormfa-status'>Loading...</span>";
+            GM_xmlhttpRequest({url:'https://admin-832cdf07.duosecurity.com/admin/global/search?query=' + clientUtorid, onload: function(){
+                if(this.status == 401){
+                    // Admin user not signed in (or doesn't have access)
+                    // First, check if we're already waiting for a login
+                    if(window.duoadminIntervalId != undefined) return;
+                    // Otherwise, ask the user to log in
+                    window.loginTab = GM_openInTab("https://admin-832cdf07.duosecurity.com/login", {'active': true, 'setParent': true});
+                    $('span.utormfa-status').html("Please log on using the newly opened tab and return here");
+                    checkLogin();
+                    return;
+                }
                 let resp = $.parseJSON(this.responseText)["response"];
                 if(resp['users'].length == 0){
                     $('span.utormfa-status').html("Could not find user, please look up manually: <a href='https://admin-832cdf07.duosecurity.com/admin'>link</a>");
