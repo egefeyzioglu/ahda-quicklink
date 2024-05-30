@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.14
+// @version     0.5.15
 // @connect     admin-832cdf07.duosecurity.com
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -151,7 +151,7 @@ if (/view.php/.test(window.location.href)) {
         $('#verify').click(function() {
 			GM_deleteValue('utorid');
 
-			GM_setValue('utorid', utorid);
+			GM_setValue('utorid', clientUtorid);
 			GM_setValue('utorid_time', Date.now());
 		});
 
