@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.15
+// @version     0.5.16
 // @connect     admin-832cdf07.duosecurity.com
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -193,6 +193,10 @@ if (/view.php/.test(window.location.href)) {
 
 			//Set password to empty value to overide browser autofill
 			$("#password").val("").focus();
+		} else {
+			// Clear contents of UTORid/password boxes to not accidentally submit admin creds
+			$("#acctname").val("");
+			$("#password").val("");
 		}
 
 	});
