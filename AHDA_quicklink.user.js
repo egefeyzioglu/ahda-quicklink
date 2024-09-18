@@ -139,7 +139,16 @@ if (/view.php/.test(window.location.href)) {
                     $('span.utormfa-status').html("Could not find user, please look up manually: <a href='https://admin-832cdf07.duosecurity.com' target='_blank'>link</a>");
                     return;
                 }else if(resp['users'].length > 1){
-                    $('span.utormfa-status').html("Found multiple users, please look up manually: <a href='https://admin-832cdf07.duosecurity.com' target='_blank'>link</a>");
+		    let users = resp['users'];
+		    let found = false;
+		    for(user in users){
+		        if(user.username == clientUtorid){
+                            GM_openInTab("https://admin-832cdf07.duosecurity.com/users/" + resp['users'][0]['key'], {'active': true});
+			    found = true;
+			    break;
+			}
+		    }
+		    if(!found) $('span.utormfa-status').html("Found multiple users, please look up manually: <a href='https://admin-832cdf07.duosecurity.com' target='_blank'>link</a>");
                     return;
                 }
                 GM_openInTab("https://admin-832cdf07.duosecurity.com/users/" + resp['users'][0]['key'], {'active': true});
