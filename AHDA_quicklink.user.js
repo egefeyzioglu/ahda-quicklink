@@ -18,7 +18,7 @@
 // @include     https://admin-832cdf07.duosecurity.com/*
 // @include     https://www.utorid.utoronto.ca/cgi-bin/utorid/acctrecoveryadmin.pl*
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
-// @version     0.5.13
+// @version     0.5.18
 // @connect     admin-832cdf07.duosecurity.com
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -136,10 +136,10 @@ if (/view.php/.test(window.location.href)) {
                 }
                 let resp = $.parseJSON(this.responseText)["response"];
                 if(resp['users'].length == 0){
-                    $('span.utormfa-status').html("Could not find user, please look up manually: <a href='https://admin-832cdf07.duosecurity.com/admin'>link</a>");
+                    $('span.utormfa-status').html("Could not find user, please look up manually: <a href='https://admin-832cdf07.duosecurity.com' target='_blank'>link</a>");
                     return;
                 }else if(resp['users'].length > 1){
-                    $('span.utormfa-status').html("Found multiple users, please look up manually: <a href='https://admin-832cdf07.duosecurity.com/admin'>link</a>");
+                    $('span.utormfa-status').html("Found multiple users, please look up manually: <a href='https://admin-832cdf07.duosecurity.com' target='_blank'>link</a>");
                     return;
                 }
                 GM_openInTab("https://admin-832cdf07.duosecurity.com/users/" + resp['users'][0]['key'], {'active': true});
@@ -151,7 +151,7 @@ if (/view.php/.test(window.location.href)) {
         $('#verify').click(function() {
 			GM_deleteValue('utorid');
 
-			GM_setValue('utorid', utorid);
+			GM_setValue('utorid', clientUtorid);
 			GM_setValue('utorid_time', Date.now());
 		});
 
@@ -193,6 +193,10 @@ if (/view.php/.test(window.location.href)) {
 
 			//Set password to empty value to overide browser autofill
 			$("#password").val("").focus();
+		} else {
+			// Clear contents of UTORid/password boxes to not accidentally submit admin creds
+			$("#acctname").val("");
+			$("#password").val("");
 		}
 
 	});
